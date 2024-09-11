@@ -298,6 +298,7 @@ export default function Header() {
                   error: "Set APR failed",
                 })
               }}
+              label="Set APR"
               innerHeader="Set APR"
               placeholder="Enter APR"
               isLoading={isPendingSetApr}
