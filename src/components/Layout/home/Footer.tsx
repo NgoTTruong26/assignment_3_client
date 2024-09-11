@@ -34,8 +34,8 @@ const iconList = [
 
 export default function Footer() {
   return (
-    <div className="flex justify-center bg-secondary-800">
-      <div className="flex w-full max-w-default gap-16 px-16 py-10 text-white">
+    <div className="flex justify-center bg-secondary-800 px-default">
+      <div className="flex w-full max-w-default gap-16 py-10 text-white">
         <div className="flex flex-1 flex-col gap-2">
           <div className="text-xl font-bold">Stay in the loop</div>
           <div>

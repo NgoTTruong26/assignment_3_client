@@ -3,6 +3,7 @@ import MainLayout from "components/Layout/home"
 import { navPaths } from "constants/nav"
 import { authRoute } from "modules/auth/route"
 import { homeRoute } from "modules/home/route"
+import { transactionHistory } from "modules/transaction-history/route"
 import { Navigate, useRoutes } from "react-router-dom"
 
 export default function Routes() {
@@ -14,7 +15,7 @@ export default function Routes() {
           <MainLayout />
         </AuthLayout>
       ),
-      children: [homeRoute, authRoute],
+      children: [homeRoute, authRoute, transactionHistory],
     },
     {
       path: "*",

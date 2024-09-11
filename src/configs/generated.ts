@@ -22,23 +22,93 @@ export const mainContractAbi = [
     type: 'event',
     anonymous: false,
     inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'ClaimReward',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'NFTId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'DepositNFT',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'DepositToken',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'FaucetERC20',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'NFTId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'MintNFT',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
       {
         name: 'operator',
         internalType: 'address',
         type: 'address',
-        indexed: false,
+        indexed: true,
       },
-      {
-        name: 'from',
-        internalType: 'address',
-        type: 'address',
-        indexed: false,
-      },
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
       {
         name: 'tokenId',
         internalType: 'uint256',
         type: 'uint256',
-        indexed: false,
+        indexed: true,
       },
       { name: 'data', internalType: 'bytes', type: 'bytes', indexed: false },
     ],
@@ -64,6 +134,75 @@ export const mainContractAbi = [
     name: 'OwnershipTransferred',
   },
   {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'APR', internalType: 'uint8', type: 'uint8', indexed: false },
+    ],
+    name: 'SetAPR',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'TransferERC20',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'NFTId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'TransferNFT',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'WithdrawERC20',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'NFTId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'WithdrawNFT',
+  },
+  {
     type: 'function',
     inputs: [],
     name: 'claimReward',
@@ -72,7 +211,16 @@ export const mainContractAbi = [
   },
   {
     type: 'function',
-    inputs: [{ name: 'NFTId', internalType: 'uint256', type: 'uint256' }],
+    inputs: [],
+    name: 'deployer',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'tokenIds', internalType: 'uint256[]', type: 'uint256[]' },
+    ],
     name: 'depositNFT',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -94,12 +242,15 @@ export const mainContractAbi = [
             internalType: 'uint256',
             type: 'uint256',
           },
-          { name: 'depositTime', internalType: 'uint256', type: 'uint256' },
           {
             name: 'lastInterestTime',
             internalType: 'uint256',
             type: 'uint256',
           },
+          { name: 'depositTime', internalType: 'uint256', type: 'uint256' },
+          { name: 'depositNFTTime', internalType: 'uint256', type: 'uint256' },
+          { name: 'lockTime', internalType: 'uint256', type: 'uint256' },
+          { name: 'isReceivedNFT', internalType: 'bool', type: 'bool' },
         ],
       },
     ],
@@ -128,84 +279,30 @@ export const mainContractAbi = [
   },
   {
     type: 'function',
-    inputs: [{ name: 'index', internalType: 'uint256', type: 'uint256' }],
-    name: 'getEventInfo',
-    outputs: [
-      {
-        name: '',
-        internalType: 'struct MainContract.EventInfo',
-        type: 'tuple',
-        components: [
-          {
-            name: 'depositToken',
-            internalType: 'struct MainContract.DepositTokenInfo',
-            type: 'tuple',
-            components: [
-              { name: 'user', internalType: 'address', type: 'address' },
-              { name: 'amount', internalType: 'uint256', type: 'uint256' },
-            ],
-          },
-          {
-            name: 'depositNFT',
-            internalType: 'struct MainContract.DepositNFTInfo',
-            type: 'tuple',
-            components: [
-              { name: 'user', internalType: 'address', type: 'address' },
-              { name: 'NFTId', internalType: 'uint256', type: 'uint256' },
-            ],
-          },
-          {
-            name: 'withdrawERC20',
-            internalType: 'struct MainContract.WithdrawERC20Info',
-            type: 'tuple',
-            components: [
-              { name: 'user', internalType: 'address', type: 'address' },
-              { name: 'amount', internalType: 'uint256', type: 'uint256' },
-            ],
-          },
-          {
-            name: 'withdrawNFT',
-            internalType: 'struct MainContract.WithdrawNFTInfo',
-            type: 'tuple',
-            components: [
-              { name: 'user', internalType: 'address', type: 'address' },
-              { name: 'NFTId', internalType: 'uint256', type: 'uint256' },
-            ],
-          },
-          {
-            name: 'claimReward',
-            internalType: 'struct MainContract.ClaimRewardInfo',
-            type: 'tuple',
-            components: [
-              { name: 'user', internalType: 'address', type: 'address' },
-              { name: 'amount', internalType: 'uint256', type: 'uint256' },
-            ],
-          },
-          {
-            name: 'transferERC20',
-            internalType: 'struct MainContract.TransferERC20Info',
-            type: 'tuple',
-            components: [
-              { name: 'from', internalType: 'address', type: 'address' },
-              { name: 'to', internalType: 'address', type: 'address' },
-              { name: 'amount', internalType: 'uint256', type: 'uint256' },
-            ],
-          },
-          {
-            name: 'transferNFT',
-            internalType: 'struct MainContract.TransferNFTInfo',
-            type: 'tuple',
-            components: [
-              { name: 'from', internalType: 'address', type: 'address' },
-              { name: 'to', internalType: 'address', type: 'address' },
-              { name: 'NFTId', internalType: 'uint256', type: 'uint256' },
-            ],
-          },
-          { name: 'successful', internalType: 'bool', type: 'bool' },
-          { name: 'timestamp', internalType: 'uint256', type: 'uint256' },
-        ],
-      },
-    ],
+    inputs: [{ name: 'user', internalType: 'address', type: 'address' }],
+    name: 'getAccumulatedInterest',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getCurrentTime',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getDeployer',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'user', internalType: 'address', type: 'address' }],
+    name: 'getInterest',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
@@ -255,7 +352,7 @@ export const mainContractAbi = [
     type: 'function',
     inputs: [
       { name: 'to', internalType: 'address', type: 'address' },
-      { name: 'NFTId', internalType: 'uint256', type: 'uint256' },
+      { name: 'tokenIds', internalType: 'uint256[]', type: 'uint256[]' },
     ],
     name: 'transferNFT',
     outputs: [],
@@ -284,7 +381,9 @@ export const mainContractAbi = [
   },
   {
     type: 'function',
-    inputs: [{ name: 'index', internalType: 'uint256', type: 'uint256' }],
+    inputs: [
+      { name: 'tokenIds', internalType: 'uint256[]', type: 'uint256[]' },
+    ],
     name: 'withdrawNFT',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -409,22 +508,33 @@ export const tokenErc20Abi = [
   },
   {
     type: 'function',
+    inputs: [{ name: 'amount', internalType: 'uint256', type: 'uint256' }],
+    name: 'faucet',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getContractBalance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'user', internalType: 'address', type: 'address' }],
+    name: 'getFaucetBalance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
     inputs: [
       { name: 'spender', internalType: 'address', type: 'address' },
       { name: 'addedValue', internalType: 'uint256', type: 'uint256' },
     ],
     name: 'increaseAllowance',
     outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: 'to', internalType: 'address', type: 'address' },
-      { name: 'amount', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'mint',
-    outputs: [],
     stateMutability: 'nonpayable',
   },
   {
@@ -628,6 +738,13 @@ export const tokenErc721Abi = [
   },
   {
     type: 'function',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'getOwnedTokens',
+    outputs: [{ name: '', internalType: 'uint256[]', type: 'uint256[]' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
     inputs: [
       { name: 'owner', internalType: 'address', type: 'address' },
       { name: 'operator', internalType: 'address', type: 'address' },
@@ -638,7 +755,10 @@ export const tokenErc721Abi = [
   },
   {
     type: 'function',
-    inputs: [{ name: 'to', internalType: 'address', type: 'address' }],
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'NFTId', internalType: 'uint256', type: 'uint256' },
+    ],
     name: 'mint',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -676,7 +796,7 @@ export const tokenErc721Abi = [
     inputs: [
       { name: 'from', internalType: 'address', type: 'address' },
       { name: 'to', internalType: 'address', type: 'address' },
-      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+      { name: 'NFTId', internalType: 'uint256', type: 'uint256' },
     ],
     name: 'safeTransferFrom',
     outputs: [],
@@ -757,6 +877,14 @@ export const useReadMainContract = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mainContractAbi}__ and `functionName` set to `"deployer"`
+ */
+export const useReadMainContractDeployer = /*#__PURE__*/ createUseReadContract({
+  abi: mainContractAbi,
+  functionName: 'deployer',
+})
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link mainContractAbi}__ and `functionName` set to `"depositOf"`
  */
 export const useReadMainContractDepositOf = /*#__PURE__*/ createUseReadContract(
@@ -781,12 +909,39 @@ export const useReadMainContractGetApr = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link mainContractAbi}__ and `functionName` set to `"getEventInfo"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mainContractAbi}__ and `functionName` set to `"getAccumulatedInterest"`
  */
-export const useReadMainContractGetEventInfo =
+export const useReadMainContractGetAccumulatedInterest =
   /*#__PURE__*/ createUseReadContract({
     abi: mainContractAbi,
-    functionName: 'getEventInfo',
+    functionName: 'getAccumulatedInterest',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mainContractAbi}__ and `functionName` set to `"getCurrentTime"`
+ */
+export const useReadMainContractGetCurrentTime =
+  /*#__PURE__*/ createUseReadContract({
+    abi: mainContractAbi,
+    functionName: 'getCurrentTime',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mainContractAbi}__ and `functionName` set to `"getDeployer"`
+ */
+export const useReadMainContractGetDeployer =
+  /*#__PURE__*/ createUseReadContract({
+    abi: mainContractAbi,
+    functionName: 'getDeployer',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mainContractAbi}__ and `functionName` set to `"getInterest"`
+ */
+export const useReadMainContractGetInterest =
+  /*#__PURE__*/ createUseReadContract({
+    abi: mainContractAbi,
+    functionName: 'getInterest',
   })
 
 /**
@@ -1033,6 +1188,51 @@ export const useWatchMainContractEvent =
   /*#__PURE__*/ createUseWatchContractEvent({ abi: mainContractAbi })
 
 /**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"ClaimReward"`
+ */
+export const useWatchMainContractClaimRewardEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'ClaimReward',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"DepositNFT"`
+ */
+export const useWatchMainContractDepositNftEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'DepositNFT',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"DepositToken"`
+ */
+export const useWatchMainContractDepositTokenEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'DepositToken',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"FaucetERC20"`
+ */
+export const useWatchMainContractFaucetErc20Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'FaucetERC20',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"MintNFT"`
+ */
+export const useWatchMainContractMintNftEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'MintNFT',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"NFTReceived"`
  */
 export const useWatchMainContractNftReceivedEvent =
@@ -1048,6 +1248,51 @@ export const useWatchMainContractOwnershipTransferredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: mainContractAbi,
     eventName: 'OwnershipTransferred',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"SetAPR"`
+ */
+export const useWatchMainContractSetAprEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'SetAPR',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"TransferERC20"`
+ */
+export const useWatchMainContractTransferErc20Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'TransferERC20',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"TransferNFT"`
+ */
+export const useWatchMainContractTransferNftEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'TransferNFT',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"WithdrawERC20"`
+ */
+export const useWatchMainContractWithdrawErc20Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'WithdrawERC20',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mainContractAbi}__ and `eventName` set to `"WithdrawNFT"`
+ */
+export const useWatchMainContractWithdrawNftEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mainContractAbi,
+    eventName: 'WithdrawNFT',
   })
 
 /**
@@ -1080,6 +1325,24 @@ export const useReadTokenErc20Decimals = /*#__PURE__*/ createUseReadContract({
   abi: tokenErc20Abi,
   functionName: 'decimals',
 })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"getContractBalance"`
+ */
+export const useReadTokenErc20GetContractBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenErc20Abi,
+    functionName: 'getContractBalance',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"getFaucetBalance"`
+ */
+export const useReadTokenErc20GetFaucetBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenErc20Abi,
+    functionName: 'getFaucetBalance',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"name"`
@@ -1137,6 +1400,14 @@ export const useWriteTokenErc20DecreaseAllowance =
   })
 
 /**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"faucet"`
+ */
+export const useWriteTokenErc20Faucet = /*#__PURE__*/ createUseWriteContract({
+  abi: tokenErc20Abi,
+  functionName: 'faucet',
+})
+
+/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"increaseAllowance"`
  */
 export const useWriteTokenErc20IncreaseAllowance =
@@ -1144,14 +1415,6 @@ export const useWriteTokenErc20IncreaseAllowance =
     abi: tokenErc20Abi,
     functionName: 'increaseAllowance',
   })
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"mint"`
- */
-export const useWriteTokenErc20Mint = /*#__PURE__*/ createUseWriteContract({
-  abi: tokenErc20Abi,
-  functionName: 'mint',
-})
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"renounceOwnership"`
@@ -1214,21 +1477,21 @@ export const useSimulateTokenErc20DecreaseAllowance =
   })
 
 /**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"faucet"`
+ */
+export const useSimulateTokenErc20Faucet =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tokenErc20Abi,
+    functionName: 'faucet',
+  })
+
+/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"increaseAllowance"`
  */
 export const useSimulateTokenErc20IncreaseAllowance =
   /*#__PURE__*/ createUseSimulateContract({
     abi: tokenErc20Abi,
     functionName: 'increaseAllowance',
-  })
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenErc20Abi}__ and `functionName` set to `"mint"`
- */
-export const useSimulateTokenErc20Mint =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: tokenErc20Abi,
-    functionName: 'mint',
   })
 
 /**
@@ -1331,6 +1594,15 @@ export const useReadTokenErc721GetBalanceNft =
   /*#__PURE__*/ createUseReadContract({
     abi: tokenErc721Abi,
     functionName: 'getBalanceNFT',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenErc721Abi}__ and `functionName` set to `"getOwnedTokens"`
+ */
+export const useReadTokenErc721GetOwnedTokens =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenErc721Abi,
+    functionName: 'getOwnedTokens',
   })
 
 /**

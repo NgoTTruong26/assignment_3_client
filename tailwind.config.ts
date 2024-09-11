@@ -19,6 +19,9 @@ const config: Config = {
       margin: {
         default: "24px",
       },
+      fontFamily: {
+        "public-sans": ['"Public Sans"', "sans-serif"],
+      },
     },
   },
   darkMode: "class",

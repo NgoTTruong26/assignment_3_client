@@ -7,7 +7,7 @@ export const wagmiConfig = createConfig({
   connectors: [metaMask()],
   transports: {
     [bscTestnet.id]: http(
-      "https://bsc-testnet.infura.io/v3/317b537f510e4a40a6126d2ee0e11b92",
+      "https://bsc-testnet.nodereal.io/v1/1234355755e141b1bbf1a81e398793af",
     ),
     [hardhat.id]: http("http://127.0.0.1:8545"),
   },
