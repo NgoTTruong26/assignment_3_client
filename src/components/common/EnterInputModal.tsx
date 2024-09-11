@@ -14,6 +14,7 @@ interface Props {
   innerHeader?: string
   placeholder?: string
   isLoading?: boolean
+  label?: string
 }
 
 export default function EnterInputModal({
@@ -22,6 +23,7 @@ export default function EnterInputModal({
   innerHeader,
   placeholder,
   isLoading,
+  label = "Tokens",
 }: Props) {
   const [amount, setAmount] = useState<number>()
 
@@ -32,7 +34,7 @@ export default function EnterInputModal({
       )}
       <ModalBody>
         <Input
-          label="Tokens"
+          label={label}
           size="lg"
           type="number"
           variant="bordered"
