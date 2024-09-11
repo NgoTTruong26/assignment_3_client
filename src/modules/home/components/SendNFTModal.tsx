@@ -35,14 +35,11 @@ export default function SendNFTModal({ onClose }: Props) {
   const { address } = useAccount()
   const { transactionToast } = useTransactionToast()
 
-  const {
-    data: ownedTokens,
-    refetch: ownedTokensRefetch,
-    isLoading: ownedTokensLoading,
-  } = useReadTokenErc721GetOwnedTokens({
-    address: TokenERC721 as EthAddress,
-    args: address && [address],
-  })
+  const { data: ownedTokens, refetch: ownedTokensRefetch } =
+    useReadTokenErc721GetOwnedTokens({
+      address: TokenERC721 as EthAddress,
+      args: address && [address],
+    })
 
   const { data: approvedForAllNFT, refetch: approvedForAllNFTRefetch } =
     useReadTokenErc721IsApprovedForAll({

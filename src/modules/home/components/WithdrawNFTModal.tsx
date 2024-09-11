@@ -31,14 +31,11 @@ export default function WithdrawNFTModal({ onClose }: Props) {
   const { address } = useAccount()
   const { transactionToast } = useTransactionToast()
 
-  const {
-    data: ownedTokens,
-    refetch: ownedTokensRefetch,
-    isLoading: ownedTokensLoading,
-  } = useReadMainContractDepositOfNft({
-    address: MainContract as EthAddress,
-    args: address && [address],
-  })
+  const { data: ownedTokens, refetch: ownedTokensRefetch } =
+    useReadMainContractDepositOfNft({
+      address: MainContract as EthAddress,
+      args: address && [address],
+    })
 
   const { refetch: balanceERC721Refetch } = useReadTokenErc721GetBalanceNft({
     address: TokenERC721 as EthAddress,
