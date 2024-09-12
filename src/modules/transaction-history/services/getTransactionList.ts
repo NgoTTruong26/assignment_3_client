@@ -33,5 +33,6 @@ export function useGetTransactionList({
     queryKey: ["getTransactionList", page, perPage, sortedByDateTime, keyword],
     queryFn: async () =>
       await getTransactionList({ page, perPage, sortedByDateTime, keyword }),
+    refetchInterval: 10 * 1000,
   })
 }

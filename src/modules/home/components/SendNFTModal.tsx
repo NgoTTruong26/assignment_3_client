@@ -187,15 +187,22 @@ export default function SendNFTModal({ onClose }: Props) {
           )}
         </div>
         <div className="flex max-h-64 flex-wrap justify-between gap-2 overflow-y-auto pr-1">
-          {SortNFTs(ownedTokens)?.map((tokenId, idx) => (
-            <NFTCheckbox
-              key={idx}
-              wrapperClass="flex-[1_1_48%] max-w-[48%]"
-              NFTId={Number(tokenId)}
-              selectedNFTs={selectedNFTs}
-              handleSelectedNFT={handleChecked}
-            />
-          ))}
+          {SortNFTs(ownedTokens) ? (
+            SortNFTs(ownedTokens)!.map((tokenId, idx) => (
+              <NFTCheckbox
+                key={idx}
+                wrapperClass="flex-[1_1_48%] max-w-[48%]"
+                NFTId={Number(tokenId)}
+                selectedNFTs={selectedNFTs}
+                handleSelectedNFT={handleChecked}
+              />
+            ))
+          ) : (
+            <div className="flex w-full flex-col items-center justify-center font-semibold text-secondary-400">
+              <Icon icon="ri:nft-line" className="pr-1 text-8xl" />
+              <div className="text-2xl">You don't have any available NFTs</div>
+            </div>
+          )}
         </div>
       </ModalBody>
       <ModalFooter>

@@ -48,16 +48,23 @@ export default function HomePage() {
     args: address && [address],
   })
 
-  const { data: balanceERC20, isLoading: balanceERC20Loading } = useBalance({
+  const {
+    data: balanceERC20,
+    isLoading: balanceERC20Loading,
+    refetch: balanceERC20Refresh,
+  } = useBalance({
     address: address,
     token: TokenERC20 as EthAddress,
   })
 
-  const { data: balanceERC721, isLoading: balanceERC721Loading } =
-    useReadTokenErc721GetBalanceNft({
-      address: TokenERC721 as EthAddress,
-      args: address && [address],
-    })
+  const {
+    data: balanceERC721,
+    isLoading: balanceERC721Loading,
+    refetch: balanceNftERC20Refresh,
+  } = useReadTokenErc721GetBalanceNft({
+    address: TokenERC721 as EthAddress,
+    args: address && [address],
+  })
 
   const {
     data: APR,
@@ -104,10 +111,17 @@ export default function HomePage() {
     const setIntervalId = setInterval(() => {
       getAccumulatedInterestRefetch()
       getAPRRefetch()
+      balanceERC20Refresh()
+      balanceNftERC20Refresh()
     }, 3000)
 
     return () => clearInterval(setIntervalId)
-  }, [getAccumulatedInterestRefetch, getAPRRefetch])
+  }, [
+    getAccumulatedInterestRefetch,
+    getAPRRefetch,
+    balanceERC20Refresh,
+    balanceNftERC20Refresh,
+  ])
 
   if (
     balanceERC20StakedLoading ||
@@ -123,7 +137,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="flex justify-center bg-blue-50 px-default pb-10 text-xl">
+    <div className="flex flex-1 justify-center bg-blue-50 px-default pb-10 text-xl">
       <div className="mt-28 w-full max-w-default">
         <div className="flex gap-5">
           <div className="flex w-full max-w-[52rem] flex-col gap-5">

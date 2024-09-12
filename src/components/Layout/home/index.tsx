@@ -4,10 +4,10 @@ import Header from "./Header"
 
 export default function MainLayout() {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Header />
       <Outlet />
       <Footer />
-    </>
+    </div>
   )
 }

@@ -89,7 +89,7 @@ export default function TransactionHistory() {
   }
 
   return (
-    <div className="flex justify-center bg-blue-50 px-default pb-10">
+    <div className="flex flex-1 justify-center bg-blue-50 px-default pb-10">
       <div className="mt-28 w-full max-w-default">
         <div className="w-full overflow-x-auto rounded-xl p-4 shadow">
           <div className="flex flex-col gap-2 pb-3">
