@@ -193,6 +193,12 @@ export default function ERC20Control() {
         })
           .then(() => allowanceERC20Refetch())
           .then(() => handleDepositERC20(token))
+          .then(() =>
+            Promise.all([
+              currentTimeBlockRefetch(),
+              balanceERC20StakedRefetch(),
+            ]),
+          )
       })
   }
 
@@ -237,6 +243,8 @@ export default function ERC20Control() {
 
   useEffect(() => {
     if (balanceERC20Staked?.lockTime && currentTimeBlock) {
+      console.log("update")
+
       const currentTime = Number(currentTimeBlock)
       const lockTime = Number(balanceERC20Staked.lockTime)
       if (lockTime > currentTime) {
@@ -248,11 +256,13 @@ export default function ERC20Control() {
       }
     }
 
-    if (Number(balanceERC20Staked?.lockTime) === 0) {
+    if (Number(balanceERC20Staked?.lockTime) < Number(currentTimeBlock)) {
+      console.log(address)
+
       setLockTime(0)
       setLockDepositERC20(false)
     }
-  }, [balanceERC20Staked, currentTimeBlock])
+  }, [balanceERC20Staked?.lockTime, currentTimeBlock, address])
 
   const userTokenERC20 = balanceERC20
     ? Number(
