@@ -224,10 +224,8 @@ export default function ERC20Control() {
             if (balanceERC20Staked?.lockTime && currentTimeBlock) {
               const currentTime = Number(currentTimeBlock)
               const lockTime = Number(balanceERC20Staked.lockTime)
-              console.log(currentTime, lockTime, "currentTime ")
 
               if (lockTime > currentTime) {
-                console.log(currentTime, lockTime, "currentTime2")
                 setLockTime(lockTime - currentTime)
 
                 setLockDepositERC20(true)
@@ -243,8 +241,6 @@ export default function ERC20Control() {
 
   useEffect(() => {
     if (balanceERC20Staked?.lockTime && currentTimeBlock) {
-      console.log("update")
-
       const currentTime = Number(currentTimeBlock)
       const lockTime = Number(balanceERC20Staked.lockTime)
       if (lockTime > currentTime) {
@@ -257,8 +253,6 @@ export default function ERC20Control() {
     }
 
     if (Number(balanceERC20Staked?.lockTime) < Number(currentTimeBlock)) {
-      console.log(address)
-
       setLockTime(0)
       setLockDepositERC20(false)
     }
@@ -395,8 +389,6 @@ export default function ERC20Control() {
           {(onClose) => (
             <EnterInputModal
               callback={(value) => {
-                console.log("value", value)
-
                 transactionToast({
                   callbackAsync: handleWithdrawERC20(value),
                   successCallback: onClose,

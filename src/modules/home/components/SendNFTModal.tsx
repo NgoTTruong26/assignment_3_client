@@ -98,8 +98,6 @@ export default function SendNFTModal({ onClose }: Props) {
     }
   }
 
-  console.log("selectedNFTs", selectedNFTs)
-
   const handleApprovalForAllNFT = async (
     addressReceiver: EthAddress,
     NFTs: number[],

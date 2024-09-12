@@ -110,10 +110,6 @@ export default function WithdrawNFTModal({ onClose }: Props) {
     }
   }
 
-  console.log("selectedNFTs", selectedNFTs)
-
-  //console.log("isCheckedAll", isCheckedAll())
-
   const SortNFTs = (NFTs?: readonly bigint[]) => {
     if (NFTs && NFTs.length > 0) {
       const newNFTs = [...NFTs]

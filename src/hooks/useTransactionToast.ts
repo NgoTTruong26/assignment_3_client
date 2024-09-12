@@ -23,8 +23,6 @@ export default function useTransactionToast() {
         return success || "Successfully"
       },
       error: (err) => {
-        console.log("err", err)
-
         if (err.message.includes("ERC20: insufficient allowance")) {
           return "ERC20: insufficient allowance"
         }
